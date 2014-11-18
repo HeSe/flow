@@ -4,9 +4,10 @@
 	"instance" : {
 		"addHandler:" : "sebastiansastre 10/20/2013 11:57",
 		"continuation" : "sebastiansastre 9/21/2014 23:04",
-		"handleRequest:" : "sebastiansastre 7/2/2014 20:28",
+		"handleRequest:" : "SebastianHeidbrink 11/08/2014 22:43",
 		"handlerFor:" : "sebastiansastre 7/2/2014 20:28",
 		"handlers" : "sebastiansastre 10/20/2013 11:58",
+		"inTransactionDo:" : "SebastianHeidbrink 11/08/2014 21:48",
 		"initializeHandlers" : "sebastiansastre 10/20/2013 11:58",
 		"onClient:" : "sebastiansastre 10/20/2013 13:32",
 		"onStop" : "sebastiansastre 10/21/2013 06:04",

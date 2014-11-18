@@ -15,10 +15,12 @@ testGetOne
 		self assert: (Thing findId: anId) id = anId.
 		self assert: (Thing findId: anId) location = 'north!'.
 		].
-		
+
+	System commitTransaction.
+	
 	apiResponse := ZnEasy get: self apiUrl,'/things/',anId.
 
-	answeredOne := MaplessMongo fromJSONString: apiResponse contents.
+	answeredOne := MaplessGemstone fromJSONString: apiResponse contents.
 
 	self assert: answeredOne notNil.
 	self assert: answeredOne class = Thing.
@@ -28,4 +30,3 @@ testGetOne
 	apiResponse := ZnEasy get: self apiUrl,'/things/', UUID new asString36.
 
 	self assert: apiResponse code = 404.
-	

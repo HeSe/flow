@@ -12,7 +12,7 @@ testGetSome
 					post: self apiUrl,'/things/query'
 					data: (ZnStringEntity text: '{"production": "quite a lot"}').
 
-	answeredOnes := MaplessMongo fromJSONString: apiResponse contents.
+	answeredOnes := MaplessGemstone fromJSONString: apiResponse contents.
 
 	answeredOnes do:[ :answeredOne |
 		self assert: (registeredOnes anySatisfy:[ :registeredOne | answeredOne = registeredOne ])]

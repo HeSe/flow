@@ -8,6 +8,5 @@ valueOn: aHandler
 		foundOrNil 
 			ifNil: [ 
 				objectSent insert.
-				ZnResponse created: aHandler basePath, objectSent id ]
+				ZnResponse created: aHandler basePath, objectSent id]
 			ifNotNil:[ self newConflictResponseFor: objectSent ] ]
-	 

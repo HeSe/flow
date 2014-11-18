@@ -6,6 +6,8 @@ testStuff
 	anId := UUID new asString36.
 	stuff := Stuff new id: anId; something: 'this'; yourself.
 
+	System abortTransaction.
+
 	self do:[ self assert: (Stuff findId: stuff id) isNil ].
 	
 	"Create"
@@ -13,11 +15,15 @@ testStuff
 						post: self apiUrl,'/stuff' 
 						data: (ZnStringEntity text: stuff asJSONString).
 
+	System abortTransaction.
+
 	self do:[ self assert: (Stuff findId: anId) notNil ].
 
 	"Retrieve one"
 	apiResponse := ZnEasy get: self apiUrl,'/stuff/', anId.
-	answeredOne := MaplessMongo fromJSONString: apiResponse contents.
+	answeredOne := MaplessGemstone fromJSONString: apiResponse contents.
+
+	System abortTransaction.
 
 	self do:[ 
 		self assert: (Stuff findId: answeredOne id) notNil.
@@ -25,7 +31,9 @@ testStuff
 
 	"Retrieve all"
 	apiResponse := ZnEasy get: self apiUrl,'/stuff'.
-	answeredOnes := MaplessMongo fromJSONString: apiResponse contents.
+	answeredOnes := MaplessGemstone fromJSONString: apiResponse contents.
+
+	System abortTransaction.
 
 	self do:[
 		answeredOnes do:[ :answered |
@@ -35,7 +43,9 @@ testStuff
 	apiResponse := ZnEasy 
 					post: self apiUrl,'/stuff/query'
 					data: (ZnStringEntity text: '{"something": "this"}').
-	answeredOnes := MaplessMongo fromJSONString: apiResponse contents.
+	answeredOnes := MaplessGemstone fromJSONString: apiResponse contents.
+
+	System abortTransaction.
 
 	self do:[
 		answeredOnes do:[ :answered |
@@ -54,13 +64,12 @@ testStuff
 	stuff hasThis: 'there'.
 
 	apiResponse := ZnEasy 
-						put: self apiUrl,'/stuff/'
+						put: self apiUrl,'/stuff'
 						data: (ZnStringEntity text: stuff asJSONString).
 
+	System abortTransaction.
+
 	self do:[ self assert: ((Stuff findId: stuff id) hasThis = 'there') ].
-
-
-
 
 	"Delete"			
 	self do:[ 		
@@ -70,5 +79,7 @@ testStuff
 		self assert: (Stuff findId: stuff id) notNil ].
 	
 	apiResponse := ZnEasy delete: self apiUrl,'/stuff/', stuff id.
+
+	System abortTransaction.
 
 	self do:[ self assert: (Stuff findId: stuff id) isNil ].

@@ -15,6 +15,8 @@ testDelete
 		
 	apiResponse := ZnEasy delete: self apiUrl,'/things/', aThing id.
 
+	System abortTransaction.
+
 	self do:[
 		self deny: (Thing findId: anId) notNil.
 		self assert: (Thing findId: anId) isNil.

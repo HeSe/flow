@@ -15,6 +15,8 @@ testCreate
 
 	self assert: apiResponse isCreated.
 	
+	System abortTransaction.
+
 	self do:[
 		self assert: (Thing findId: anId) notNil.
 		self assert: (Thing findId: anId) id = anId.

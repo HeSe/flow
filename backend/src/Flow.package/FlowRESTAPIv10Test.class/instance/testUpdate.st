@@ -18,9 +18,9 @@ testUpdate
 	apiResponse := ZnEasy 
 						put: self apiUrl,'/things' 
 						data: (ZnStringEntity text: registeredThing asJSONString).
-	
+
+	System abortTransaction.
+
 	self do: [	
 		self assert: (Thing findId: registeredThing id) notNil.
 		self assert: (Thing findId: registeredThing id) production = 'quite a lot'].
-
-
